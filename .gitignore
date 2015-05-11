@@ -1,0 +1,16 @@
+*.user
+*.sdf
+*.o
+*.pdb
+*.tmp
+*.obj
+*.tlog
+*.suo
+*.manifest
+*.Debug
+*.Release
+Makefile*
+Release/
+Debug/
+rScreen/Release/
+rScreen/Debug/
