@@ -23,7 +23,7 @@ namespace rs
 		return GetSystemMetrics(SM_CYSCREEN);
 	}
 
-	//最终f的内存布局为rgb格式
+	//The Memory layout is RGBARGBA...
 	void ScreenCap(void* buf, int* w, int* h)
 	{
 

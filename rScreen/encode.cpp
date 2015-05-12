@@ -11,13 +11,20 @@ namespace rs
 
 	void default_proc_data_callback(void* encoded_data, int encoded_data_len, void* pUser)
 	{
+        const char* fname;
+        if (pUser != 0)
+            fname = (const char*)pUser;
+        else
+            fname = default_file_name;
+        
 		FILE* f;
-		fopen_s(&f, default_file_name, "ab");
+		fopen_s(&f, fname, "ab");
 		if (f == NULL)
 		{
 			fprintf(stderr, "open file %s failed!\n", default_file_name);
 			exit(0);
 		}
+
 		fwrite(encoded_data, 1, encoded_data_len, f);
 		fclose(f);
 	}
@@ -29,7 +36,7 @@ namespace rs
 		int screen_width = get_screen_width();
 		int screen_height = get_screen_height();
 
-		printf("screen:width[%d], height[%d]\n", screen_width, screen_height);
+		//printf("screen:width[%d], height[%d]\n", screen_width, screen_height);
 		
 		unsigned char* buf = new unsigned char[screen_width * screen_height * 4];
 
