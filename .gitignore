@@ -1,5 +1,6 @@
 *.user
 *.sdf
+*.opensdf
 *.o
 *.pdb
 *.tmp
@@ -9,6 +10,7 @@
 *.manifest
 *.Debug
 *.Release
+*.avi
 Makefile*
 Release/
 Debug/

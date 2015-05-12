@@ -23,7 +23,7 @@ namespace rs
 		return GetSystemMetrics(SM_CYSCREEN);
 	}
 
-	//The Memory layout is RGBARGBA...
+	//The Memory layout is BGRABGRA...
 	void ScreenCap(void* buf, int* w, int* h)
 	{
 
