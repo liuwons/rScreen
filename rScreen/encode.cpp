@@ -38,10 +38,9 @@ namespace rs
 		int screen_width = get_screen_width();
 		int screen_height = get_screen_height();
 
-        unsigned char* buf = new unsigned char[screen_width * screen_height * 4];
-        if (buf == NULL)
+        std::shared_ptr<unsigned char> buf_ptr(new unsigned char[screen_width * screen_height * 4], [](unsigned char* p){delete[] p; });
+        if (buf_ptr.get() == NULL)
             return ERR_MEM_ALLOCATE_FAILED;
-        std::shared_ptr<unsigned char> buf_ptr(buf, [](unsigned char* p){delete[] p;});
 
 		AVCodec *codec;
 		AVCodecContext *codec_context = 0;
@@ -112,9 +111,9 @@ namespace rs
 			current_time = GetTickCount() - start_time;
 			last_encode_time = current_time;
 
-			ScreenCap(buf);
+			ScreenCap(buf_ptr.get());
 
-			avpicture_fill((AVPicture*)rgb_frame, (uint8_t*)buf, AV_PIX_FMT_BGRA, codec_context->width, codec_context->height); 
+            avpicture_fill((AVPicture*)rgb_frame, (uint8_t*)(buf_ptr.get()) , AV_PIX_FMT_BGRA, codec_context->width, codec_context->height);
 
 			av_init_packet(&pkt);
 			pkt.data = NULL;
