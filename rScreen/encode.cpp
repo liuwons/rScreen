@@ -4,6 +4,8 @@
 
 #include <windows.h>
 
+#include <memory>
+using std::tr1::shared_ptr;
 
 namespace rs
 {
@@ -36,9 +38,10 @@ namespace rs
 		int screen_width = get_screen_width();
 		int screen_height = get_screen_height();
 
-		//printf("screen:width[%d], height[%d]\n", screen_width, screen_height);
-		
-		unsigned char* buf = new unsigned char[screen_width * screen_height * 4];
+        unsigned char* buf = new unsigned char[screen_width * screen_height * 4];
+        if (buf == NULL)
+            return ERR_MEM_ALLOCATE_FAILED;
+        std::shared_ptr<unsigned char> buf_ptr(buf, [](unsigned char* p){delete[] p;});
 
 		AVCodec *codec;
 		AVCodecContext *codec_context = 0;
